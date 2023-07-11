@@ -28,7 +28,9 @@ jobs:
           key: ${{ github.actor }}-wrkflw-2-cache-${{ hashFiles('**/packacge-lock.json') }}
       - if: steps.wrkflw2-cc.outputs.cache-hit != 'true'
         run: npm i
-      - name: Using secrets
+      - name: Unit testing using secrets.
         env:
           APP_TOKEN: ${{ secrets.ASSIGNMENT_3_SEC }}
         run: npm run test
+      - name: Build app
+        run: npm run build
