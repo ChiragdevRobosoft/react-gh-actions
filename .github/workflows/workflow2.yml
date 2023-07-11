@@ -2,7 +2,7 @@
 # Set '2aae6c35c94fcfb415dbe95f408b9ce91ee846ed' as a github secret and set it as environment variable 'APP TOKEN'
 # workflow should include unit-test and build the app.
 
-name: Assignment 3
+name: Assignment 3 - Task 2
 
 run-name: PR -> develop, app_token, test & build.
 
@@ -31,4 +31,4 @@ jobs:
       - name: Using secrets
         env:
           APP_TOKEN: ${{ secrets.ASSIGNMENT_3_SEC }}
-        run: echo $APP_TOKEN
+        run: npm run test
