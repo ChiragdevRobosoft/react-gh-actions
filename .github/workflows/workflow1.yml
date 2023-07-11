@@ -9,7 +9,7 @@ run-name: Workflow -> Install, Caching, Cache hit or miss.
 on: push
 
 jobs:
-  3-in-1:
+  three-in-one:
     runs-on: ubuntu-latest
     steps:
       - name: Code checkout
