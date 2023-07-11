@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v3 #caching action to cache specified files path.
         with:
           path: | #file path/s to be cached.
-            **/node-modules
+            **/node_modules
           key: ${{ runner.os }}-dependency-cache-${{ hashFiles('**/package-lock.json') }} #key to store & access the cached files by the job step.
       - name: Cache check
         run: echo ${{ steps.cache-dependencies.outputs.cache-hit == 'true' && 'It was a cache hit' || 'Its was a cache miss' }}
