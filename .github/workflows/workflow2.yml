@@ -15,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: action/checkout@v3
+        uses: actions/checkout@v3
       - name: Node setup
         uses: actions/setup-node@v3
         with:
           node-version: "16"
       - name: Cache node
         id: wrkflw2-cc
-        uses: action/cache@v3
+        uses: actions/cache@v3
         with:
           path: "**/node_modules"
           key: ${{ github.actor }}-wrkflw-2-cache-${{ hashFiles('**/packacge-lock.json') }}
