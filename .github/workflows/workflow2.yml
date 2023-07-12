@@ -7,8 +7,9 @@ name: Assignment 3 - Task 2
 run-name: PR -> develop, app_token, test & build.
 
 on:
-  push:
-    branches: "develop"
+  pull-request:
+    branches:
+      - develop
 
 jobs:
   using-secrets:
