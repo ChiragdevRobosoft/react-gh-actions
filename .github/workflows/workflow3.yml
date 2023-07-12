@@ -16,4 +16,22 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'develop' && github.event.pull_request.base.ref == 'main'
     steps:
-      - run: echo Merge triger is working.
+      - name: Code checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+      - id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-dependency-cache-${{ hashFiles('**/package-lock.json') }}
+      - if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: npm i
+      - run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: react-app@v1
+          path: |
+            build
