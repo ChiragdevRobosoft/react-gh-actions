@@ -14,6 +14,6 @@ on:
 jobs:
   merge-job:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == 'true'
+    if: github.event.pull_request.merged == true
     steps:
       - run: echo Merge triger is working
