@@ -1,0 +1,19 @@
+# runs on pull request merge from 'develop' to 'main'
+# • build the react app and store the build artifacts for later usage.
+#   artifact name should be in this format -> <appName@version>
+# • Update the run summary with the above artifact name.
+
+name: Assignment 3 - Task 3
+run-name: PR - 'develpo' -> 'main', build app & store artifact, run summary update.
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  merge-job:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == 'true'
+    steps:
+      - run: echo Merge triger is working
