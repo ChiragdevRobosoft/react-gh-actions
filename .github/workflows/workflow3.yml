@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
-      - run: echo Merge triger is working, FROM ${{ github.event.pull_request.base.ref == main }} TO ${{ github.event.pull_request.head.ref == develop }}
+      - run: echo Merge triger is working, FROM ${{ github.event.pull_request.base.ref == main && true || false }} TO ${{ github.event.pull_request.head.ref == develop && true || false }}
