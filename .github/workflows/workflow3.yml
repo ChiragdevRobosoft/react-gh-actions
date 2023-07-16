@@ -30,8 +30,10 @@ jobs:
       - if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: npm i
       - run: npm run build
+      - name: Package.json info
+        uses: rexdefuror/read-package-json@v1.0.5
       - uses: actions/upload-artifact@v3
         with:
-          name: react-app@v1
+          name: `${{ env.PACKAGE_NAME }}@${{ env.PACKAGE_VERSION }}
           path: |
             build
