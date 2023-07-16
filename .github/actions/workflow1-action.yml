@@ -12,25 +12,24 @@ inputs:
     required: false
     default: "16.x"
 
-jobs:
-  three-in-one:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Code checkout
-        uses: actions/checkout@v3 #checksout repo code to the runner.
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ version-of-node }} #uses node version 16 and its sub versions.
-      - name: Caching dependencies.
-        id: cache-dependencies
-        uses: actions/cache@v3 #caching action to cache specified files path.
-        with:
-          path: | #file path/s to be cached.
-            **/node_modules
-          key: ${{ runner.os }}-dependency-cache-${{ hashFiles('**/package-lock.json') }} #key to store & access the cached files by the job step.
-      - name: Cache check
-        run: echo ${{ steps.cache-dependencies.outputs.cache-hit == 'true' && 'It was a cache hit' || 'Its was a cache miss' }}
-      - if: steps.cache-dependencies.outputs.cache-hit != 'true' #if cache is not present the do install, cache-miss happens when key not match or on first workflow run.
-        name: Manual dependency install
-        run: npm i
+runs:
+  using: "composite"
+  steps:
+    - name: Code checkout
+      uses: actions/checkout@v3 #checksout repo code to the runner.
+    - name: Setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ version-of-node }} #uses node version 16 and its sub versions.
+    - name: Caching dependencies.
+      id: cache-dependencies
+      uses: actions/cache@v3 #caching action to cache specified files path.
+      with:
+        path: | #file path/s to be cached.
+          **/node_modules
+        key: ${{ runner.os }}-dependency-cache-${{ hashFiles('**/package-lock.json') }} #key to store & access the cached files by the job step.
+    - name: Cache check
+      run: echo ${{ steps.cache-dependencies.outputs.cache-hit == 'true' && 'It was a cache hit' || 'Its was a cache miss' }}
+    - if: steps.cache-dependencies.outputs.cache-hit != 'true' #if cache is not present the do install, cache-miss happens when key not match or on first workflow run.
+      name: Manual dependency install
+      run: npm i
