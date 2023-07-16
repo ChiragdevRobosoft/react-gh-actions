@@ -4,7 +4,7 @@
 
 name: "Assignment 3 - Task 1"
 
-run-name: Action -> Install, Caching, Cache hit or miss.
+description: "Does node instalation and caching steps"
 
 inputs:
   version-of-node:
