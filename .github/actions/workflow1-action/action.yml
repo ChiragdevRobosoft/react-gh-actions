@@ -30,6 +30,8 @@ runs:
         key: ${{ runner.os }}-dependency-cache-${{ hashFiles('**/package-lock.json') }} #key to store & access the cached files by the job step.
     - name: Cache check
       run: echo ${{ steps.cache-dependencies.outputs.cache-hit == 'true' && 'It was a cache hit' || 'Its was a cache miss' }}
+      shell: bash
     - if: steps.cache-dependencies.outputs.cache-hit != 'true' #if cache is not present the do install, cache-miss happens when key not match or on first workflow run.
       name: Manual dependency install
       run: npm i
+      shell: bash
