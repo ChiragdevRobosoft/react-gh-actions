@@ -6,12 +6,6 @@ name: "Assignment 3 - Task 1"
 
 run-name: Workflow -> Install, Caching, Cache hit or miss.
 
-# inputs:
-#   version-of-node:
-#     description: "Specific node version"
-#     required: true
-#     default: "16.x"
-
 on: push
 
 jobs:
@@ -21,7 +15,7 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v3
       - name: "action trial"
-        uses: ./.github/actions/workflow1-action
+        uses: actions/workflow1-action
         with:
           version-of-node: "16.x"
       - run: echo "Hi i'm here"
