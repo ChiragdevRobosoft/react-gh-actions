@@ -6,52 +6,56 @@ name: "Assignment 3 - Task 1"
 
 run-name: Workflow -> Install, Caching, Cache hit or miss.
 
-# inputs:
-#   version-of-node:
-#     description: 'Specific node version'
-#     required: true
-#     default: '16.x'
+inputs:
+  version-of-node:
+    description: "Specific node version"
+    required: true
+    default: "16.x"
 
 on: push
 
 jobs:
-  dump_contexts_to_log:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
   three-in-one:
     runs-on: ubuntu-latest
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v3 #checksout repo code to the runner.
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - name: "action trial"
+        uses: actions/workflow1-action
         with:
-          node-version: "16.x" #uses node version 16 and its sub versions.
-      - name: Caching dependencies.
-        id: cache-dependencies
-        uses: actions/cache@v3 #caching action to cache specified files path.
-        with:
-          path: | #file path/s to be cached.
-            **/node_modules
-          key: ${{ runner.os }}-dependency-cache-${{ hashFiles('**/package-lock.json') }} #key to store & access the cached files by the job step.
-      - name: Cache check
-        run: echo ${{ steps.cache-dependencies.outputs.cache-hit == 'true' && 'It was a cache hit' || 'Its was a cache miss' }}
-      - if: steps.cache-dependencies.outputs.cache-hit != 'true' #if cache is not present the do install, cache-miss happens when key not match or on first workflow run.
-        name: Manual dependency install
-        run: npm i
+          version-of-node: "16.x"
+      # - name: Code checkout
+      #   uses: actions/checkout@v3 #checksout repo code to the runner.
+      # - name: Setup node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: "16.x" #uses node version 16 and its sub versions.
+      # - name: Caching dependencies.
+      #   id: cache-dependencies
+      #   uses: actions/cache@v3 #caching action to cache specified files path.
+      #   with:
+      #     path: | #file path/s to be cached.
+      #       **/node_modules
+      #     key: ${{ runner.os }}-dependency-cache-${{ hashFiles('**/package-lock.json') }} #key to store & access the cached files by the job step.
+      # - name: Cache check
+      #   run: echo ${{ steps.cache-dependencies.outputs.cache-hit == 'true' && 'It was a cache hit' || 'Its was a cache miss' }}
+      # - if: steps.cache-dependencies.outputs.cache-hit != 'true' #if cache is not present the do install, cache-miss happens when key not match or on first workflow run.
+      #   name: Manual dependency install
+      #   run: npm i
+# dump_contexts_to_log:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Dump GitHub context
+#         env:
+#           GITHUB_CONTEXT: ${{ toJson(github) }}
+#         run: echo "$GITHUB_CONTEXT"
+#       - name: Dump job context
+#         env:
+#           JOB_CONTEXT: ${{ toJson(job) }}
+#         run: echo "$JOB_CONTEXT"
+#       - name: Dump steps context
+#         env:
+#           STEPS_CONTEXT: ${{ toJson(steps) }}
+#         run: echo "$STEPS_CONTEXT"
+#       - name: Dump runner context
+#         env:
+#           RUNNER_CONTEXT: ${{ toJson(runner) }}
+#         run: echo "$RUNNER_CONTEXT"
