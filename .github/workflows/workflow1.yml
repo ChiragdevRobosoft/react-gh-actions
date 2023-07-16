@@ -18,10 +18,10 @@ jobs:
   three-in-one:
     runs-on: ubuntu-latest
     steps:
-      # - name: "action trial"
-      #   uses: actions/workflow1-action
-      #   with:
-      #     version-of-node: "16.x"
+      - name: "action trial"
+        uses: ./.github/actions/workflow1-action
+        with:
+          version-of-node: "16.x"
       - run: echo "Hi i'm here"
       # - name: Code checkout
       #   uses: actions/checkout@v3 #checksout repo code to the runner.
