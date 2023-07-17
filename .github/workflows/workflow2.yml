@@ -17,18 +17,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      # - name: Node setup
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: "16"
-      # - name: Cache node
-      #   id: wrkflw2-cc
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: "**/node_modules"
-      #     key: ${{ github.actor }}-wrkflw-2-cache-${{ hashFiles('**/packacge-lock.json') }}
-      # - if: steps.wrkflw2-cc.outputs.cache-hit != 'true'
-      #   run: npm i
       - name: "Install dependency action"
         uses: ./.github/actions/workflow1-action
         with:
@@ -39,3 +27,15 @@ jobs:
         run: npm run test
       - name: Build app
         run: npm run build
+# - name: Node setup
+#   uses: actions/setup-node@v3
+#   with:
+#     node-version: "16"
+# - name: Cache node
+#   id: wrkflw2-cc
+#   uses: actions/cache@v3
+#   with:
+#     path: "**/node_modules"
+#     key: ${{ github.actor }}-wrkflw-2-cache-${{ hashFiles('**/packacge-lock.json') }}
+# - if: steps.wrkflw2-cc.outputs.cache-hit != 'true'
+#   run: npm i
