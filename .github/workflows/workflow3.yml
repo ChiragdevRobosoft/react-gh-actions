@@ -18,17 +18,10 @@ jobs:
     steps:
       - name: Code checkout
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Dependency install action
+        uses: ./.github/actions/workflow1-action
         with:
-          node-version: "16.x"
-      - id: cache-dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-dependency-cache-${{ hashFiles('**/package-lock.json') }}
-      - if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: npm i
+          version-of-node: "16.x"
       - run: npm run build
       - name: Package.json info
         uses: rexdefuror/read-package-json@v1.0.5
